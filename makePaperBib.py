@@ -2,12 +2,6 @@
 
 import sys
 import re
-# import biblib.bib
-import pdb
-
-# DEFAULT_CITE_OPT = ['cite', 'citep', 'citet', 'fullcite', 'citeauthor', 'citeyear']
-# if citeOpt is None:
-# 	citeOpt = DEFAULT_CITE_OPT
 
 def get_cite_list(fname):
 	cite_list = []
@@ -41,8 +35,6 @@ def main():
 	cite_list = get_cite_list('test1.tex')
 	bib_file = parse_bib('fx.bib')
 	make_reduced_bib(cite_list, bib_file, output_file='out.bib')
-
-	# pdb.set_trace()
 
 if __name__ == "__main__":
 	main()
