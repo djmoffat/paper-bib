@@ -1,13 +1,31 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import re
+import argparse
+
+
+def get_args():
+	"""
+	Read the arguments and return them to main.
+	"""
+	parser = argparse.ArgumentParser(
+		description='This project is a basic python script to allow to make a stripped down bib file, for a specific tex file.')
+	parser.add_argument('-i','--input',
+		help='input tex file')
+	parser.add_argument('-b','--bibfile',
+		help='input bib file')
+	parser.add_argument('-o','--output',default="output.bib",
+		help='output bib file')
+
+	return parser.parse_args()
 
 def get_cite_list(fname):
 	cite_list = []
 	ind_cite_list = []
-	cite_list += [re.findall("\\cite[a-z]*\{(.*?)\}",line) for line in open(fname)]
-	cite_list = sum(cite_list,[])
+	for line in open(fname):
+		match_cites = re.findall(r"\\cite[a-z]*\{(.*?)\}",line)
+		cite_list += match_cites
 	for cite in cite_list:
 		ind_cite_list += cite.replace(' ','').split(',')
 	return sorted(set(ind_cite_list))
@@ -31,10 +49,12 @@ def make_reduced_bib(cite_list,bib_file,output_file='out.bib'):
 			f.write(bib_file.get(cite,"")+'\n')
 
 
-def main():
-	cite_list = get_cite_list('test1.tex')
-	bib_file = parse_bib('fx.bib')
-	make_reduced_bib(cite_list, bib_file, output_file='out.bib')
+def main(input_file=None,output_file=None,bibfile=None):
+	cite_list = get_cite_list(input_file)
+	parsed_bibfile = parse_bib(bibfile)
+	make_reduced_bib(cite_list, parsed_bibfile, output_file=output_file)
 
 if __name__ == "__main__":
-	main()
+	args = get_args()
+	main(input_file=args.input,output_file=args.output,bibfile=args.bibfile)
+
