@@ -43,13 +43,13 @@ def parse_bib(fname):
 			pass
 	return bib_dict
 
-def make_reduced_bib(cite_list,bib_file,output_file='out.bib'):
+def make_reduced_bib(cite_list,bib_file,output_file):
 	with open(output_file,'w') as f:
 		for cite in cite_list:
 			f.write(bib_file.get(cite,"")+'\n')
 
 
-def main(input_file=None,output_file=None,bibfile=None):
+def main(input_file,output_file,bibfile):
 	cite_list = get_cite_list(input_file)
 	parsed_bibfile = parse_bib(bibfile)
 	make_reduced_bib(cite_list, parsed_bibfile, output_file=output_file)
