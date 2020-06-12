@@ -12,7 +12,7 @@ def get_args():
 		description='This project is a basic python script to allow to make a stripped down bib file, for a specific tex file.')
 	parser.add_argument('-i','--input',
 		help='input tex file')
-	parser.add_argument('-b','--bibfile',
+	parser.add_argument('-b','--bibfile',default="general.bib",
 		help='input bib file')
 	parser.add_argument('-o','--output',default="output.bib",
 		help='output bib file')
