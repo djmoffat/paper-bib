@@ -13,9 +13,9 @@ def get_args():
 	parser.add_argument('-i','--input',
 		help='input tex file')
 	parser.add_argument('-b','--bibfile',default="general.bib",
-		help='input bib file')
+		help='input bib file (Default = "general.bib")')
 	parser.add_argument('-o','--output',default="output.bib",
-		help='output bib file')
+		help='output bib file (Default = "output.bib")')
 
 	return parser.parse_args()
 
